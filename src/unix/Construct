@@ -30,14 +30,19 @@ $do_updateserver = 0;
 $do_lddabort = 1; 
 
 # compiler
-$CC='gcc -m32';
-$CXX='g++ -m32';
+$CC='gcc';
+$CXX='g++';
 $LINK=$CXX;
+$dllarch = 'i386';
 
 # detection of CPU type
 $cpu = `uname -m`;
 chop ($cpu);
-if ($cpu +~ /i?86/)
+if ($cpu eq 'x86_64')
+{
+  $dllarch = 'x86_64';
+}
+elsif ($cpu +~ /i?86/)
 {
   $cpu = 'x86';
 }
@@ -221,7 +226,7 @@ if ($do_update eq 0)
 
   Link $BUILD_DIR => '..';
 
-  Export qw( BASE_CFLAGS CONFIG_DIR BUILD_DIR BASEGAME do_lddabort CC CXX LINK );
+  Export qw( BASE_CFLAGS CONFIG_DIR BUILD_DIR BASEGAME do_lddabort CC CXX LINK dllarch );
 
   Build $BUILD_DIR . '/unix/Conscript-game';
 	
@@ -237,7 +242,7 @@ if ($do_update eq 0)
 
     Link $BUILD_DIR => '../..';
 
-    Export qw( BASE_CFLAGS CONFIG_DIR BUILD_DIR BASEGAME do_lddabort CC CXX LINK );
+    Export qw( BASE_CFLAGS CONFIG_DIR BUILD_DIR BASEGAME do_lddabort CC CXX LINK dllarch );
 
     Build $BUILD_DIR . '/src/unix/Conscript-cgame';
 
@@ -248,7 +253,7 @@ if ($do_update eq 0)
 
     Link $BUILD_DIR => '../..';
 
-    Export qw( BASE_CFLAGS CONFIG_DIR BUILD_DIR BASEGAME do_lddabort CC CXX LINK );
+    Export qw( BASE_CFLAGS CONFIG_DIR BUILD_DIR BASEGAME do_lddabort CC CXX LINK dllarch );
 
     Build $BUILD_DIR . '/src/unix/Conscript-ui';
   }

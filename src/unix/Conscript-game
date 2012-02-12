@@ -1,6 +1,6 @@
 # game
 
-Import qw( BASE_CFLAGS CONFIG_DIR BUILD_DIR BASEGAME do_lddabort CC CXX LINK );
+Import qw( BASE_CFLAGS CONFIG_DIR BUILD_DIR BASEGAME do_lddabort CC CXX LINK dllarch );
 
 $env = new cons(
 	CC => $CC,
@@ -70,8 +70,8 @@ $env = new cons(
 $FILESREF = \@FILES;
 
 # NOTE: could use an ldd -r after .so build to catch unresolved symbols? (PostBuild command)
-Program $env 'qagame.mp.i386.so', @$FILESREF;
-my $path = FilePath('qagame.mp.i386.so');
-AfterBuild $env 'qagame.mp.i386.so', "[perl] &ldd_check::do_check(\'$path\', $do_lddabort)";
+Program $env 'qagame.mp.'.$dllarch.'.so', @$FILESREF;
+my $path = FilePath('qagame.mp.'.$dllarch.'.so');
+AfterBuild $env 'qagame.mp.'.$dllarch.'.so', "[perl] &ldd_check::do_check(\'$path\', $do_lddabort)";
 
-Install $env '#' . $CONFIG_DIR . '/out/' . $BASEGAME, 'qagame.mp.i386.so';
+Install $env '#' . $CONFIG_DIR . '/out/' . $BASEGAME, 'qagame.mp.'.$dllarch.'.so';
