@@ -7,8 +7,9 @@ endif(COMMAND cmake_policy)
 
 option(ENABLE_DEMO "Build pre-release demo version")
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -pipe -fsigned-char -fvisibility=hidden")
-set(CMAKE_C_FLAGS_RELEASE "-DNDEBUG -O6 -fomit-frame-pointer -ffast-math -malign-loops=2 -malign-jumps=2 -malign-functions=2 -fno-strict-aliasing -fstrength-reduce")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pipe -fsigned-char -fvisibility=hidden")
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -Wall")
+set(CMAKE_C_FLAGS_RELEASE "-DNDEBUG -O6 -fomit-frame-pointer -ffast-math -falign-loops=2 -falign-jumps=2 -falign-functions=2 -fno-strict-aliasing -fstrength-reduce")
 
 include(CheckTypeSize)
 check_type_size(void*  SIZEOF_VOID_PTR)
