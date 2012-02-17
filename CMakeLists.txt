@@ -7,7 +7,7 @@ endif(COMMAND cmake_policy)
 
 option(ENABLE_DEMO "Build pre-release demo version")
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -pipe -fsigned-char")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -pipe -fsigned-char -fvisibility=hidden")
 set(CMAKE_C_FLAGS_RELEASE "-DNDEBUG -O6 -fomit-frame-pointer -ffast-math -malign-loops=2 -malign-jumps=2 -malign-functions=2 -fno-strict-aliasing -fstrength-reduce")
 
 include(CheckTypeSize)

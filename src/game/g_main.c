@@ -325,6 +325,8 @@ This must be the very first function compiled into the .q3vm file
 */
 #if defined( __MACOS__ )
 #pragma export on
+#elif __GNUC__ >= 4
+__attribute__((visibility("default")))
 #endif
 intptr_t vmMain( int command, intptr_t arg0, intptr_t arg1, intptr_t arg2, intptr_t arg3, intptr_t arg4, intptr_t arg5, intptr_t arg6 ) {
 #if defined( __MACOS__ )
