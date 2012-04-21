@@ -1,5 +1,5 @@
-Return to Castle Wolfenstein multiplayer GPL source release
-===========================================================
+Return to Castle Wolfenstein multiplayer GPL game source
+========================================================
 
 This file contains the following sections:
 
@@ -8,6 +8,15 @@ LICENSE
 
 GENERAL NOTES
 =============
+
+Game engine:
+------------
+
+This release contains only the source of the game DLL files. It was separated
+from JLQuake in order to keep it clean and because there are no plans on doing
+any improvements on game code. 32 bit game DLLs built from this release should
+still be compatible with original engine, but it's recomended to use an improved
+game engine such as JLQuake.
 
 Game data and patching:
 -----------------------
@@ -23,34 +32,37 @@ http://store.steampowered.com/app/9010/
 Linux note: due to the game CD containing only a Windows version of the game,
 you must install and update the game using WINE to get the game data.
 
-Compiling on win32:
+Compiling on Windows:
 -------------------
 
-A Visual C++ 2008 project is provided in src\wolf.sln.
+A Visual C++ 2010 project is provided in src\wolf.sln.
 The solution file is compatible with the Express release of Visual C++.
 
-In order to test your binaries, backup and remove Main\mp_bin.pk3,
-then replace WolfMP.exe, Main\qagame_mp_x86.dll, Main\cgame_mp_x86.dll, Main\ui_mp_x86.dll.
+In order to test your 32 bit binaries, backup and remove Main\mp_bin.pk3,
+then replace Main\qagame_mp_x86.dll, Main\cgame_mp_x86.dll, Main\ui_mp_x86.dll.
+
+On 64 bit Windows copy files qagame_mp_x86_64.dll, cgame_mp_x86_64.dll
+and ui_mp_x86_64.dll into Main directory on RTCW install. You'll need a 64 bit
+version of JLQuake to run them.
+
 When starting the server make sure to specify Pure Server: No (sv_pure 0).
 
-Compiling on GNU/Linux x86:
----------------------------
+Compiling on GNU/Linux and other UNIX based systems:
+----------------------------------------------------
 
-Go to the src/unix directory, and run the cons script
-(cons was an old precursor to scons which we had been using in earlier projects)
+mkdir build
+cd build
+cmake ..
+make
 
-Run ./cons -h to review build options. Use ./cons -- release to compile in release mode.
+You can test your 32 bit binaries by replacing qagame.mp.i386.so,
+cgame.mp.i386.so, ui.mp.i386.so in directory main of the RTCW install.
 
-If any problems occur, consult the internet.
+On 64 bit systems copy qagame.mp.x86_64.so, cgame.mp.x86_64.so and
+ui.mp.x86_64.so into directory main of the RTCW install. You'll need a 64 bit
+version of JLQuake to run them.
 
-Other platforms, updated source code, security issues:
-------------------------------------------------------
-
-If you have obtained this source code several weeks after the time of release
-(August 2010), it is likely that you can find modified and improved
-versions of the engine in various open source projects across the internet.
-Depending what is your interest with the source code, those may be a better
-starting point.
+When starting the server make sure to specify Pure Server: No (sv_pure 0).
 
 
 LICENSE
